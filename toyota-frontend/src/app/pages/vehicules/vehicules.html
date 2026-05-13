@@ -1,0 +1,148 @@
+<div class="vehicules-container">
+  <h1>🚗 Gestion des Véhicules</h1>
+
+  <mat-card class="add-vehicule-card">
+    <h2>➕ Ajouter un Nouveau Véhicule</h2>
+    
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Marque *</mat-label>
+        <input matInput [(ngModel)]="newVehicule.marque" placeholder="Toyota, Mercedes...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Modèle *</mat-label>
+        <input matInput [(ngModel)]="newVehicule.modele" placeholder="Corolla, C200...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Immatriculation *</mat-label>
+        <input matInput [(ngModel)]="newVehicule.immatriculation" placeholder="XXX-1234-ZZ">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Année *</mat-label>
+        <input matInput [(ngModel)]="newVehicule.annee" type="number" placeholder="2024">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Couleur</mat-label>
+        <input matInput [(ngModel)]="newVehicule.couleur" placeholder="Noir, Blanc...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Kilométrage</mat-label>
+        <input matInput [(ngModel)]="newVehicule.kilometrage" type="number" placeholder="0">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addVehicule()" class="submit-btn">
+      ✅ Ajouter Véhicule
+    </button>
+  </mat-card>
+
+  <mat-card class="list-card">
+    <h2>📋 Liste des Véhicules</h2>
+
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="vehicules" class="vehicules-table">
+        
+        <ng-container matColumnDef="marque">
+          <th mat-header-cell *matHeaderCellDef>Marque</th>
+          <td mat-cell *matCellDef="let v">{{ v.marque }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="modele">
+          <th mat-header-cell *matHeaderCellDef>Modèle</th>
+          <td mat-cell *matCellDef="let v">{{ v.modele }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="immatriculation">
+          <th mat-header-cell *matHeaderCellDef>Immatriculation</th>
+          <td mat-cell *matCellDef="let v">{{ v.immatriculation }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="annee">
+          <th mat-header-cell *matHeaderCellDef>Année</th>
+          <td mat-cell *matCellDef="let v">{{ v.annee }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="couleur">
+          <th mat-header-cell *matHeaderCellDef>Couleur</th>
+          <td mat-cell *matCellDef="let v">{{ v.couleur || '-' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="kilometrage">
+          <th mat-header-cell *matHeaderCellDef>Kilométrage</th>
+          <td mat-cell *matCellDef="let v">{{ v.kilometrage || 0 }} km</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let v">
+            <button mat-icon-button color="primary" (click)="editVehicule(v)" title="Modifier">
+              ✏️
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteVehicule(v.id)" title="Supprimer">
+              🗑️
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['marque', 'modele', 'immatriculation', 'annee', 'couleur', 'kilometrage', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['marque', 'modele', 'immatriculation', 'annee', 'couleur', 'kilometrage', 'actions'];"></tr>
+      </table>
+    </div>
+
+    <div *ngIf="vehicules.length === 0" class="no-data">
+      <p>Aucun véhicule trouvé.</p>
+    </div>
+  </mat-card>
+
+  <div *ngIf="selectedVehicule" class="edit-section">
+    <mat-card>
+      <h2>✏️ Modifier Véhicule</h2>
+      
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Marque</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.marque">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Modèle</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.modele">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Immatriculation</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.immatriculation">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Année</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.annee" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Couleur</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.couleur">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Kilométrage</mat-label>
+          <input matInput [(ngModel)]="selectedVehicule.kilometrage" type="number">
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="updateVehicule()">
+          💾 Sauvegarder
+        </button>
+        <button mat-raised-button (click)="selectedVehicule = null">
+          ❌ Annuler
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

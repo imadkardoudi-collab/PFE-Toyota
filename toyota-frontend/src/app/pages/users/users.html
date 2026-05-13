@@ -1,0 +1,138 @@
+<div class="users-container">
+  <h1>👥 Gestion des Utilisateurs</h1>
+
+  <mat-card class="add-user-card">
+    <h2>➕ Créer un Nouvel Utilisateur</h2>
+
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom d'Utilisateur *</mat-label>
+        <input matInput [(ngModel)]="newUser.username" placeholder="Entrez le nom d'utilisateur (3-50 caractères)">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de Passe *</mat-label>
+        <input matInput type="password" [(ngModel)]="newUser.password" placeholder="Entrez le mot de passe (minimum 6 caractères)">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rôle *</mat-label>
+        <mat-select [(ngModel)]="newUser.role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role === 'ADMIN' ? '👨‍💼 Administrateur' : '📋 Réceptionniste' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addUser()" class="submit-btn">
+      ✅ Créer Utilisateur
+    </button>
+  </mat-card>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <div class="stat-header">
+        <span class="stat-icon">👨‍💼</span>
+        <h3>Administrateurs</h3>
+      </div>
+      <div class="stat-value">{{ getAdminCount() }}</div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-header">
+        <span class="stat-icon">📋</span>
+        <h3>Réceptionnistes</h3>
+      </div>
+      <div class="stat-value">{{ getTechnicianCount() }}</div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-header">
+        <span class="stat-icon">👥</span>
+        <h3>Total Utilisateurs</h3>
+      </div>
+      <div class="stat-value">{{ users.length }}</div>
+    </mat-card>
+  </div>
+
+  <mat-card class="list-card">
+    <h2>📊 Liste des Utilisateurs</h2>
+
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="users" class="users-table">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Nom d'Utilisateur</th>
+          <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Rôle</th>
+          <td mat-cell *matCellDef="let user">
+            <span class="role-badge" [class]="'role-' + user.role.toLowerCase()">
+              {{ user.role === 'ADMIN' ? '👨‍💼 ' : '📋 ' }}{{ user.role }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let user">
+            <button mat-icon-button color="primary" (click)="editUser(user)" title="Modifier">
+              ✏️
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteUser(user.id)" title="Supprimer">
+              🗑️
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['id', 'username', 'role', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'username', 'role', 'actions'];"></tr>
+      </table>
+    </div>
+
+    <div *ngIf="users.length === 0" class="no-data">
+      <p>Aucun utilisateur trouvé.</p>
+    </div>
+  </mat-card>
+
+  <!-- Edit Section -->
+  <div *ngIf="selectedUser" class="edit-section">
+    <mat-card>
+      <h2>✏️ Modifier Utilisateur</h2>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom d'Utilisateur</mat-label>
+          <input matInput [(ngModel)]="selectedUser.username" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rôle</mat-label>
+          <mat-select [(ngModel)]="selectedUser.role">
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ role === 'ADMIN' ? '👨‍💼 Administrateur' : '📋 Réceptionniste' }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="updateUser()">
+          💾 Sauvegarder
+        </button>
+        <button mat-raised-button (click)="selectedUser = null">
+          ❌ Annuler
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

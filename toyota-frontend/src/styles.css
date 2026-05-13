@@ -1,0 +1,96 @@
+/* 🌙 DARK MODE GLOBAL */
+.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* toutes les pages */
+.dark-theme body,
+.dark-theme app-root,
+.dark-theme mat-sidenav-content {
+  background-color: #121212;
+  color: white;
+}
+
+/* cards */
+.dark-theme mat-card {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+/* inputs */
+.dark-theme input {
+  color: white;
+}
+
+/* boutons */
+.dark-theme button {
+  color: white;
+}
+
+/* toolbar + sidebar */
+.dark-theme mat-toolbar {
+  background-color: #1f1f1f !important;
+}
+
+.dark-theme mat-sidenav {
+  background-color: #1a1a1a;
+}
+.dark-theme .mat-mdc-button,
+.dark-theme .mat-mdc-icon-button {
+  color: white !important;
+}
+/* 🌙 SIDEBAR DARK MODE FIX */
+
+/* texte des liens */
+.dark-theme .mat-mdc-list-item {
+  color: white !important;
+}
+
+/* icônes */
+.dark-theme mat-icon {
+  color: white !important;
+}
+
+/* hover effet */
+.dark-theme .mat-mdc-list-item:hover {
+  background-color: #2a2a2a !important;
+}
+
+/* lien actif (optionnel stylé 😎) */
+.dark-theme .mat-mdc-list-item.active {
+  background-color: #333 !important;
+}
+.dark-theme a {
+  color: white !important;
+}
+/* 🔥 FIX COMPLET SIDEBAR DARK MODE */
+
+/* lien complet (container) */
+.dark-theme .mat-mdc-list-item {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* texte داخل bouton */
+.dark-theme .mdc-list-item__primary-text {
+  color: white !important;
+}
+
+/* icônes */
+.dark-theme .mat-mdc-list-item mat-icon {
+  color: white !important;
+}
+
+/* lien <a> */
+.dark-theme .mat-mdc-list-item a {
+  color: white !important;
+}
+
+/* hover */
+.dark-theme .mat-mdc-list-item:hover {
+  background-color: #2a2a2a !important;
+}
+.dark-theme .mdc-list-item__content {
+  color: white !important;
+}

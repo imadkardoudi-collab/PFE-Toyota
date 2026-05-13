@@ -1,0 +1,194 @@
+.interventions-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.interventions-container h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.interventions-container h2 {
+  color: #34495e;
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem 0;
+  font-weight: 600;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+/* Material Card Overrides */
+mat-card {
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+/* Button Styles */
+.submit-btn {
+  width: 100%;
+  height: 45px;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+/* Table Styling */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+
+.interventions-table {
+  width: 100%;
+  background: white;
+}
+
+.interventions-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.interventions-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #667eea;
+}
+
+.interventions-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.interventions-table tbody tr {
+  transition: background 0.3s ease;
+}
+
+.interventions-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.interventions-table mat-icon-button {
+  margin: 0 0.25rem;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-en-attente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-en-cours {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.status-completee {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+/* Edit Section */
+.edit-section {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  flex: 1;
+  max-width: 200px;
+}
+
+/* No Data Message */
+.no-data {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 3rem 1rem;
+  font-size: 1.1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .interventions-container {
+    padding: 1rem;
+  }
+
+  .interventions-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    max-width: 100%;
+  }
+
+  .interventions-table {
+    font-size: 0.9rem;
+  }
+
+  .interventions-table th,
+  .interventions-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}

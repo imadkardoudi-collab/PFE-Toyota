@@ -1,0 +1,84 @@
+<mat-sidenav-container style="height: 100vh;">
+
+  <!-- SIDEBAR -->
+  <mat-sidenav mode="side" [opened]="isOpen">
+    <h2 style="padding: 10px;">🚗 Toyota</h2>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a mat-list-item routerLink="clients" routerLinkActive="active">
+        <mat-icon>people</mat-icon>
+        Clients
+      </a>
+
+      <a mat-list-item routerLink="vehicules">
+        <mat-icon>directions_car</mat-icon>
+        Véhicules
+      </a>
+
+      <a mat-list-item routerLink="interventions">
+        <mat-icon>build</mat-icon>
+        Interventions
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLink="users" *ngIf="auth.getRole() === 'ADMIN'">
+        <mat-icon>admin_panel_settings</mat-icon>
+        Utilisateurs
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- CONTENU -->
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+
+      <!-- MENU -->
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- TITRE -->
+      <span>🚗 Toyota Dashboard</span>
+
+      <!-- ESPACE -->
+      <span style="flex: 1 1 auto;"></span>
+
+      <!-- DARK MODE -->
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>dark_mode</mat-icon>
+      </button>
+
+      <!-- USER PROFILE 👇 -->
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+        Imad
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          Profil
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+
+    </mat-toolbar>
+
+    <div style="padding: 20px;">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
